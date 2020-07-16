@@ -1,29 +1,30 @@
-<template>
+<template>    
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js + TypeScript App"/>
+    <div v-for="n in 9" :key="n">
+      <div class="btn-left">
+        <button v-for="n in 20" :key="n" type="button" class="btn btn-secondary btn-circle"></button>
+      </div>
+      <div class="btn-right">
+        <button v-for="n in 20" :key="n" type="button" class="btn btn-secondary btn-circle"></button>
+      </div>
+    </div>
   </div>
 </template>
 
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator';
 import HelloWorld from './components/HelloWorld.vue';
+import { BootstrapVue, IconsPlugin } from 'bootstrap-vue';
+import 'bootstrap/dist/css/bootstrap.css';
+import 'bootstrap-vue/dist/bootstrap-vue.css';
 
-@Component({
-  components: {
-    HelloWorld,
-  },
-})
+// Install BootstrapVue
+Vue.use(BootstrapVue)
+// Optionally install the BootstrapVue icon components plugin
+Vue.use(IconsPlugin)
+
+
+require('./styles.css');
+
 export default class App extends Vue {}
 </script>
-
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
-</style>
