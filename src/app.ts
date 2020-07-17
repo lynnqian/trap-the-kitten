@@ -1,5 +1,6 @@
 import Vue from 'vue'
 
+// noinspection JSUnusedGlobalSymbols
 export const App = Vue.extend({
     data () {
         return {
@@ -14,6 +15,7 @@ export const App = Vue.extend({
         onResize () {
             this.windowH = window.innerHeight;
             this.windowW = window.innerWidth;
+
             const divH = this.windowH * 0.85;
             this.vertiN = Math.floor(divH / 86);
             // TODO: Change the divW calculation for better mobile experience.
