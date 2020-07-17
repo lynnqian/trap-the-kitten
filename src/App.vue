@@ -1,13 +1,15 @@
 <template>    
   <div id="app">
-    <div v-for="i in 9" :key="i">
-      <div class="btn-left">
-        <button v-for="j in 20" :key="j" type="button" class="btn btn-secondary btn-circle" :style="testStyle" :id="'btn' + (i-1)*2 + '-' + j">
-        </button>
-      </div>
-      <div class="btn-right">
-        <button v-for="j in 20" :key="j" type="button" class="btn btn-secondary btn-circle" :style="testStyle" :id="'btn' + ((i-1)*2+1) + '-' + j">
-        </button>
+    <div :style="getMainContainerStyle()">
+      <div v-for="i in vertiN" :key="i">
+        <div class="btn-left">
+          <button v-for="j in horiN" :key="j" :id="'btn' + (i-1)*2 + '-' + j"
+                  type="button" class="btn btn-secondary btn-circle"></button>
+        </div>
+        <div class="btn-right">
+          <button v-for="j in horiN" :key="j" :id="'btn' + ((i-1)*2+1) + '-' + j"
+                  type="button" class="btn btn-secondary btn-circle"></button>
+        </div>
       </div>
     </div>
   </div>
