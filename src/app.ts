@@ -8,6 +8,9 @@ export const App = Vue.extend({
             windowW: window.innerWidth,
             vertiN: Math.floor(window.innerHeight * 0.85 / 86),
             horiN: Math.floor(window.innerWidth * 0.60 / 43),
+            gameStart: false,
+            shownButton: true,
+            array: [[false]],
         };
     },
 
@@ -27,10 +30,26 @@ export const App = Vue.extend({
             return {
                 marginTop: this.windowH * 0.15 / 2 + 'px'
             };
+        },
+
+        getGameBoard () {
+            this.array = Array(this.vertiN * 2).fill(Array(this.horiN).fill(false));
+            this.array = Array(this.vertiN * 2);
+            for (let _i = 0; _i < this.vertiN * 2; _i++) {
+                this.array[_i] = Array(this.horiN).fill(false);
+            }
+            this.gameStart = true;
+            this.shownButton = false;
+            console.log(this.array);
+        },
+
+        clickOnBoard: function(row: number, col: number) {
+            this.array[row][col] = true;
+            console.log(this.array);
         }
     },
 
-    mounted() {
+    mounted () {
         this.$nextTick(() => {
             window.addEventListener('resize', this.onResize);
         });
