@@ -3,14 +3,23 @@ import Vue from 'vue'
 // noinspection JSUnusedGlobalSymbols
 export const App = Vue.extend({
     data () {
+        const vn = Math.floor(window.innerHeight * 0.85 / 86);
+        const hn = Math.floor(window.innerWidth * 0.60 / 43);
+
+        // Init board array.
+        const bArr = Array(vn * 2);
+        for (let i = 0; i < vn * 2; i++) {
+            bArr[i] = Array(hn).fill(false);
+        }
+
         return {
             windowH: window.innerHeight,
             windowW: window.innerWidth,
-            vertiN: Math.floor(window.innerHeight * 0.85 / 86),
-            horiN: Math.floor(window.innerWidth * 0.60 / 43),
+            vertiN: vn,
+            horiN: hn,
             gameStart: false,
             shownButton: true,
-            boardArray: [[false]],
+            boardArray: bArr,
         };
     },
 
@@ -32,27 +41,17 @@ export const App = Vue.extend({
             };
         },
 
-        getGameBoard () {
-            this.boardArray = Array(this.vertiN * 2).fill(Array(this.horiN).fill(false));
-            this.boardArray = Array(this.vertiN * 2);
-            for (let _i = 0; _i < this.vertiN * 2; _i++) {
-                this.boardArray[_i] = Array(this.horiN).fill(false);
-            }
-            this.gameStart = true;
-            this.shownButton = false;
-            console.log(this.boardArray);
-        },
-
         clickOnBoard: function(row: number, col: number) {
             this.boardArray[row][col] = true;
             console.log(this.boardArray);
+
+            // Force update the style of buttons.
+            this.$forceUpdate();
         },
 
         getButtonStyle: function(row: number, col: number) {
-            if (this.boardArray[row][col] == true) {
-                const buttonId = String('btn' + row + '-' + (col+1))
-                document.getElementById(buttonId)!.style.backgroundColor = "palevioletred"; 
-            } 
+            console.log(this.boardArray[row][col])
+            return this.boardArray[row][col] ? { backgroundColor: "palevioletred" } : {};
         }
     },
 

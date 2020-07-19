@@ -1,16 +1,15 @@
 <template>    
   <div id="app">
-    <button class="btn btn-primary" @click="getGameBoard" v-if="shownButton">Start the Game!</button>
-    <div :style="getMainContainerStyle()" v-if="gameStart">
+    <div :style="getMainContainerStyle()">
       <img src="../img/kitten.png" alt="kitten" class="kitten-image">
       <div v-for="i in vertiN" :key="i">
         <div class="btn-left">
-          <button v-for="j in horiN" :key="j" :id="'btn' + (i-1)*2 + '-' + j"
-                  type="button" class="btn btn-pink btn-circle" @click="clickOnBoard((i-1)*2, j-1), getButtonStyle((i-1)*2, j-1)"></button>
+          <button v-for="j in horiN" :key="j" :style="getButtonStyle((i-1)*2, j-1)"
+                  type="button" class="btn btn-pink btn-circle" @click="clickOnBoard((i-1)*2, j-1)"></button>
         </div>
         <div class="btn-right">
-          <button v-for="j in horiN" :key="j" :id="'btn' + ((i-1)*2+1) + '-' + j"
-                  type="button" class="btn btn-pink btn-circle" @click="clickOnBoard((i-1)*2+1, j-1), getButtonStyle((i-1)*2+1, j-1)"></button>
+          <button v-for="j in horiN" :key="j" :style="getButtonStyle((i-1)*2+1, j-1)"
+                  type="button" class="btn btn-pink btn-circle" @click="clickOnBoard((i-1)*2+1, j-1)"></button>
         </div>
       </div>
     </div>
