@@ -10,7 +10,7 @@ export const App = Vue.extend({
             horiN: Math.floor(window.innerWidth * 0.60 / 43),
             gameStart: false,
             shownButton: true,
-            array: [[false]],
+            boardArray: [[false]],
         };
     },
 
@@ -33,19 +33,26 @@ export const App = Vue.extend({
         },
 
         getGameBoard () {
-            this.array = Array(this.vertiN * 2).fill(Array(this.horiN).fill(false));
-            this.array = Array(this.vertiN * 2);
+            this.boardArray = Array(this.vertiN * 2).fill(Array(this.horiN).fill(false));
+            this.boardArray = Array(this.vertiN * 2);
             for (let _i = 0; _i < this.vertiN * 2; _i++) {
-                this.array[_i] = Array(this.horiN).fill(false);
+                this.boardArray[_i] = Array(this.horiN).fill(false);
             }
             this.gameStart = true;
             this.shownButton = false;
-            console.log(this.array);
+            console.log(this.boardArray);
         },
 
         clickOnBoard: function(row: number, col: number) {
-            this.array[row][col] = true;
-            console.log(this.array);
+            this.boardArray[row][col] = true;
+            console.log(this.boardArray);
+        },
+
+        getButtonStyle: function(row: number, col: number) {
+            if (this.boardArray[row][col] == true) {
+                const buttonId = String('btn' + row + '-' + (col+1))
+                document.getElementById(buttonId)!.style.backgroundColor = "palevioletred"; 
+            } 
         }
     },
 

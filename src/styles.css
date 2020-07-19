@@ -23,3 +23,12 @@
 .btn-right {
   margin-left: 20px;
 }
+
+.kitten-image {
+  width: 70px;
+  height: auto;
+}
+
+.btn-pink {
+  background-color: pink;
+}
