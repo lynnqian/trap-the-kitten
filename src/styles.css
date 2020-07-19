@@ -16,6 +16,11 @@
     color: #2c3e50;
 }
 
+.btn:focus, .btn:active {
+    outline: none !important;
+    box-shadow: none;
+}
+
 .btn-left {
   margin-right: 20px;
 }
