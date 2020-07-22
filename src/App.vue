@@ -1,14 +1,14 @@
 <template>    
   <div id="app">
     <div :style="getMainContainerStyle()">
-      <img src="../img/kitten.png" alt="kitten" class="kitten-image">
+      <img src="../img/kitten.png" alt="kitten" id="kitten-image">
       <div v-for="i in vertiN" :key="i">
         <div class="btn-left">
-          <button v-for="j in horiN" :key="j" :style="getButtonStyle((i-1)*2, j-1)"
-                  type="button" class="btn btn-pink btn-circle" @click="clickOnBoard((i-1)*2, j-1)"></button>
+          <button v-for="j in horiN" :key="j" :style="getButtonStyle((i-1)*2, j-1)" :id="'btn' + (i-1)*2 + '-' + (j-1)"
+                  type="button" class="btn btn-pink btn-circle" @click="clickOnBoard((i-1)*2, j-1), clicked()"></button>
         </div>
         <div class="btn-right">
-          <button v-for="j in horiN" :key="j" :style="getButtonStyle((i-1)*2+1, j-1)"
+          <button v-for="j in horiN" :key="j" :style="getButtonStyle((i-1)*2+1, j-1)" :id="'btn' + ((i-1)*2+1) + '-' + (j-1)"
                   type="button" class="btn btn-pink btn-circle" @click="clickOnBoard((i-1)*2+1, j-1)"></button>
         </div>
       </div>

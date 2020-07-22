@@ -11,6 +11,7 @@ export const App = Vue.extend({
         for (let i = 0; i < vn * 2; i++) {
             bArr[i] = Array(hn).fill(false);
         }
+        
 
         return {
             windowH: window.innerHeight,
@@ -52,7 +53,23 @@ export const App = Vue.extend({
         getButtonStyle: function(row: number, col: number) {
             console.log(this.boardArray[row][col])
             return this.boardArray[row][col] ? { backgroundColor: "palevioletred" } : {};
+        },
+        getOffset(el: Element) {
+            const rect = el.getBoundingClientRect();
+            return {
+              left: rect.left + window.scrollX,
+              top: rect.top + window.scrollY
+            };
+        },
+        clicked() {
+            const kitten = document.getElementById("kitten-image")
+            const tempId = 'btn' + Math.floor(this.vertiN-1) + '-' + Math.floor((this.horiN-1)/2)
+            const middleButton = document.getElementById(tempId)
+            kitten!.style.position = "absolute"
+            kitten!.style.left = middleButton?.offsetLeft!-15 + "px"
+            kitten!.style.top = middleButton?.offsetTop!-15 + "px"
         }
+
     },
 
     mounted () {
