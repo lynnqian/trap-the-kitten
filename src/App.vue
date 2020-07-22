@@ -9,7 +9,7 @@
         </div>
         <div class="btn-right">
           <button v-for="j in horiN" :key="j" :style="getButtonStyle((i-1)*2+1, j-1)" :id="'btn' + ((i-1)*2+1) + '-' + (j-1)"
-                  type="button" class="btn btn-pink btn-circle" @click="clickOnBoard((i-1)*2+1, j-1)"></button>
+                  type="button" class="btn btn-pink btn-circle" @click="clickOnBoard((i-1)*2+1, j-1), clicked()"></button>
         </div>
       </div>
     </div>

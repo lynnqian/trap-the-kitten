@@ -1,5 +1,15 @@
 import Vue from 'vue'
 
+//--- Helper functions
+function updateKittenPosWithBtnID(x: number, y: number) {
+    const kitten = document.getElementById("kitten-image")
+    const tempId = 'btn' + x + '-' + y
+    const middleButton = document.getElementById(tempId)
+    kitten!.style.position = "absolute"
+    kitten!.style.left = middleButton?.offsetLeft!-15 + "px"
+    kitten!.style.top = middleButton?.offsetTop!-15 + "px"
+}
+
 // noinspection JSUnusedGlobalSymbols
 export const App = Vue.extend({
     data () {
@@ -54,6 +64,7 @@ export const App = Vue.extend({
             console.log(this.boardArray[row][col])
             return this.boardArray[row][col] ? { backgroundColor: "palevioletred" } : {};
         },
+
         getOffset(el: Element) {
             const rect = el.getBoundingClientRect();
             return {
@@ -61,20 +72,21 @@ export const App = Vue.extend({
               top: rect.top + window.scrollY
             };
         },
-        clicked() {
-            const kitten = document.getElementById("kitten-image")
-            const tempId = 'btn' + Math.floor(this.vertiN-1) + '-' + Math.floor((this.horiN-1)/2)
-            const middleButton = document.getElementById(tempId)
-            kitten!.style.position = "absolute"
-            kitten!.style.left = middleButton?.offsetLeft!-15 + "px"
-            kitten!.style.top = middleButton?.offsetTop!-15 + "px"
-        }
 
+        clicked() {
+            // TODO: Change the x, y generator here to make the kitten smarter
+            const x = Math.floor(Math.random() * (this.vertiN - 1) * 2)
+            const y = Math.floor(Math.random() * (this.horiN - 1))
+
+            updateKittenPosWithBtnID(x, y)
+        }
     },
 
     mounted () {
         this.$nextTick(() => {
             window.addEventListener('resize', this.onResize);
         });
+
+        updateKittenPosWithBtnID(this.vertiN - 1, Math.floor((this.horiN - 1) / 2))
     }
 })
