@@ -80,9 +80,7 @@ export const App = Vue.extend({
         clicked() {
             console.log(this.vertiN, this.horiN)
             if (this.currentX < this.currentY) {
-                console.log("plan1")
                 if (this.canUpMove(this.currentX, this.currentY)) {
-                    console.log("can up move!")
                     this.upMove()
                 } else if (this.canLeftMove(this.currentX, this.currentY)) {
                     this.leftMove()
@@ -91,24 +89,19 @@ export const App = Vue.extend({
                 } else if (this.canDownMove(this.currentX, this.currentY)) {
                     this.downMove()
                 } else {
-                    console.log("You lose!");
+                    console.log("WINNNNNNN!!!!");
                 }
             } else {
-                console.log("plan2")
                 if (this.canLeftMove(this.currentX, this.currentY)) {
-                    console.log("left")
                     this.leftMove()
                 } else if (this.canUpMove(this.currentX, this.currentY)) {
-                    console.log("up")
                     this.upMove()  
                 } else if (this.canDownMove(this.currentX, this.currentY)) {
-                    console.log("down")
                     this.downMove()
                 } else if (this.canRightMove(this.currentX, this.currentY)) {
-                    console.log("right")
                     this.rightMove()
                 } else {
-                    console.log("You lose!");
+                    console.log("WINNNNNNN!!!!");
                 }
             }
             this.detectWinOrLose()
@@ -199,49 +192,12 @@ export const App = Vue.extend({
         },
 
         leftMove() {
-            const left = this.boardArray[this.currentX][this.currentY-1]
-            const down = this.boardArray[this.currentX+1][this.currentY]
-            const downLeft = this.boardArray[this.currentX+1][this.currentY-1]
-            const downRight = this.boardArray[this.currentX+1][this.currentY+1]
-            if (!left) {
-                updateKittenPosWithBtnID(this.currentX, this.currentY-1)
-                this.currentY -= 1
-            } else if (this.canUpMove(this.currentX, this.currentY)) {
-                this.upMove()
-            } else if (!downLeft && this.currentX%2 == 0){
-                updateKittenPosWithBtnID(this.currentX+1, this.currentY-1)
-                this.currentX += 1
-                this.currentY -= 1
-            } else if (!down) {
-                updateKittenPosWithBtnID(this.currentX+1, this.currentY)
-                this.currentX += 1
-            } else {
-                updateKittenPosWithBtnID(this.currentX+1, this.currentY+1)
-                this.currentX += 1
-                this.currentY += 1
-            }
+            updateKittenPosWithBtnID(this.currentX, this.currentY-1)
+            this.currentY -= 1
         },
         rightMove(){
-            const right = this.boardArray[this.currentX][this.currentY+1]
-            const down = this.boardArray[this.currentX+1][this.currentY]
-            const downLeft = this.boardArray[this.currentX+1][this.currentY-1]
-            const downRight = this.boardArray[this.currentX+1][this.currentY+1]
-            if (!right) {
-                updateKittenPosWithBtnID(this.currentX, this.currentY+1)
-                this.currentY += 1
-            } else if (!downLeft && this.currentX%2 == 0) {
-                updateKittenPosWithBtnID(this.currentX+1, this.currentY-1)
-                this.currentX += 1
-                this.currentY -= 1
-            } else if (!down){
-                updateKittenPosWithBtnID(this.currentX+1, this.currentY)
-                this.currentX += 1
-            } else {
-                updateKittenPosWithBtnID(this.currentX+1, this.currentY+1)
-                this.currentX += 1
-                this.currentY += 1
-                
-            }
+            updateKittenPosWithBtnID(this.currentX, this.currentY+1)
+            this.currentY += 1
         },
         upMove() {
             const up = this.boardArray[this.currentX-1][this.currentY]
