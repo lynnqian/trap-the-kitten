@@ -78,41 +78,47 @@ export const App = Vue.extend({
         },
 
         clicked() {
-            // TODO: Change the x, y generator here to make the kitten smarter
-            const left = this.boardArray[this.currentX][this.currentY-1]
-            const up = this.boardArray[this.currentX-1][this.currentY]
-            const upLeft = this.boardArray[this.currentX-1][this.currentY-1]
-            const upRight = this.boardArray[this.currentX-1][this.currentY+1]
+            console.log(this.vertiN, this.horiN)
             if (this.currentX < this.currentY) {
-                if (this.canUpMove(this.currentX, this.currentY) == true) {
+                console.log("plan1")
+                if (this.canUpMove(this.currentX, this.currentY)) {
+                    console.log("can up move!")
                     this.upMove()
-                    console.log("ok")
-                } else if (this.canLeftMove(this.currentX, this.currentY) == true) {
+                } else if (this.canLeftMove(this.currentX, this.currentY)) {
                     this.leftMove()
-                }    
+                } else if (this.canRightMove(this.currentX, this.currentY)) {
+                    this.rightMove()
+                } else if (this.canDownMove(this.currentX, this.currentY)) {
+                    this.downMove()
+                } else {
+                    console.log("You lose!");
+                }
             } else {
-                if (this.canLeftMove(this.currentX, this.currentY) == true) {
+                console.log("plan2")
+                if (this.canLeftMove(this.currentX, this.currentY)) {
+                    console.log("left")
                     this.leftMove()
-                } else if (this.canUpMove(this.currentX, this.currentY) == true) {
+                } else if (this.canUpMove(this.currentX, this.currentY)) {
+                    console.log("up")
                     this.upMove()  
-                }  
+                } else if (this.canDownMove(this.currentX, this.currentY)) {
+                    console.log("down")
+                    this.downMove()
+                } else if (this.canRightMove(this.currentX, this.currentY)) {
+                    console.log("right")
+                    this.rightMove()
+                } else {
+                    console.log("You lose!");
+                }
             }
             this.detectWinOrLose()
         },
 
         canLeftMove(x: number, y: number): boolean {
             const left = this.boardArray[x][y-1]
-            const up = this.boardArray[x-1][y]
-            const upLeft = this.boardArray[x-1][y-1]
-            const upRight = this.boardArray[x-1][y+1]
-            const down = this.boardArray[x+1][y]
-            const downLeft = this.boardArray[x+1][y-1]
-            const downRight = this.boardArray[x+1][y+1]
             if (y == 0) {
                 return true
-            } else if (x%2 != 0 && left==true && (up==true||upRight==true) && (down==true || downRight==true)) {
-                return false
-            } else if (x%2 == 0 && left==true && (up==true||upLeft==true) && (down==true || downLeft == true)) {
+            } else if (left) {
                 return false
             } else {
                 return this.canLeftMove(x, y-1)
@@ -121,17 +127,9 @@ export const App = Vue.extend({
 
         canRightMove(x: number, y: number): boolean {
             const right = this.boardArray[x][y+1]
-            const up = this.boardArray[x-1][y]
-            const upLeft = this.boardArray[x-1][y-1]
-            const upRight = this.boardArray[x-1][y+1]
-            const down = this.boardArray[x+1][y]
-            const downLeft = this.boardArray[x+1][y-1]
-            const downRight = this.boardArray[x+1][y+1]
             if (y == this.horiN) {
                 return true
-            } else if (x%2 != 0 && right==true && (up==true||upRight==true) && (down==true || downRight==true)) {
-                return false
-            } else if (x%2 == 0 && right==true && (up==true||upLeft==true) && (down==true || downLeft == true)) {
+            } else if (right) {
                 return false
             } else {
                 return this.canRightMove(x, y+1)
@@ -142,26 +140,26 @@ export const App = Vue.extend({
             const up = this.boardArray[x-1][y]
             const upLeft = this.boardArray[x-1][y-1]
             const upRight = this.boardArray[x-1][y+1]
-            if (x == 1 && (up == false || upRight == false)) {
+            if (x == 1 && (!up || !upRight)) {
                 return true
-            }  else if (x == 1) {
+            }  else if (x == 1 && up && upRight) {
                 return false
             } else if (x%2 != 0) {
-                if (up == true && upRight == true) {
+                if (up && upRight) {
                     return false
-                } else if (up == true) {
+                } else if (up) {
                     return this.canUpMove(x-1, y+1)
-                } else if (upRight == true) {
+                } else if (upRight) {
                     return this.canUpMove(x-1, y)
                 } else {
                     return this.canUpMove(x-1, y)||this.canUpMove(x-1, y+1)
                 }
             } else {
-                if (up == true && upLeft == true) {
+                if (up && upLeft) {
                     return false
-                } else if (up == true) {
+                } else if (up) {
                     return this.canUpMove(x-1, y-1)
-                } else if (upLeft == true) {
+                } else if (upLeft) {
                     return this.canUpMove(x-1, y)
                 } else {
                     return this.canUpMove(x-1, y)||this.canUpMove(x-1, y-1)
@@ -173,24 +171,26 @@ export const App = Vue.extend({
             const down = this.boardArray[x+1][y]
             const downLeft = this.boardArray[x+1][y-1]
             const downRight = this.boardArray[x+1][y+1]
-            if (x == 0) {
+            if (x == this.vertiN*2-2 && (!down || !downRight)) {
                 return true
+            } else if (x == this.vertiN*2-2 && down && downRight) {
+                return false
             } else if (x%2 != 0) {
-                if (down == true && downRight == true) {
+                if (down && downRight) {
                     return false
-                } else if (down == true) {
+                } else if (down) {
                     return this.canDownMove(x+1, y+1)
-                } else if (downRight == true) {
+                } else if (downRight) {
                     return this.canDownMove(x+1, y)
                 } else {
                     return this.canDownMove(x+1, y)||this.canDownMove(x+1, y+1)
                 }
             } else {
-                if (down == true && downLeft == true) {
+                if (down && downLeft) {
                     return false
-                } else if (down == true) {
+                } else if (down) {
                     return this.canDownMove(x+1, y-1)
-                } else if (downLeft == true) {
+                } else if (downLeft) {
                     return this.canDownMove(x+1, y)
                 } else {
                     return this.canDownMove(x+1, y)||this.canDownMove(x+1, y-1)
@@ -200,19 +200,53 @@ export const App = Vue.extend({
 
         leftMove() {
             const left = this.boardArray[this.currentX][this.currentY-1]
-            if (left == false) {
+            const down = this.boardArray[this.currentX+1][this.currentY]
+            const downLeft = this.boardArray[this.currentX+1][this.currentY-1]
+            const downRight = this.boardArray[this.currentX+1][this.currentY+1]
+            if (!left) {
                 updateKittenPosWithBtnID(this.currentX, this.currentY-1)
                 this.currentY -= 1
-            } else if (this.canUpMove(this.currentX, this.currentY) == true) {
-                updateKittenPosWithBtnID(this.currentX-1, this.currentY)
-                this.currentX -= 1
+            } else if (this.canUpMove(this.currentX, this.currentY)) {
+                this.upMove()
+            } else if (!downLeft && this.currentX%2 == 0){
+                updateKittenPosWithBtnID(this.currentX+1, this.currentY-1)
+                this.currentX += 1
+                this.currentY -= 1
+            } else if (!down) {
+                updateKittenPosWithBtnID(this.currentX+1, this.currentY)
+                this.currentX += 1
+            } else {
+                updateKittenPosWithBtnID(this.currentX+1, this.currentY+1)
+                this.currentX += 1
+                this.currentY += 1
             }
         },
-
+        rightMove(){
+            const right = this.boardArray[this.currentX][this.currentY+1]
+            const down = this.boardArray[this.currentX+1][this.currentY]
+            const downLeft = this.boardArray[this.currentX+1][this.currentY-1]
+            const downRight = this.boardArray[this.currentX+1][this.currentY+1]
+            if (!right) {
+                updateKittenPosWithBtnID(this.currentX, this.currentY+1)
+                this.currentY += 1
+            } else if (!downLeft && this.currentX%2 == 0) {
+                updateKittenPosWithBtnID(this.currentX+1, this.currentY-1)
+                this.currentX += 1
+                this.currentY -= 1
+            } else if (!down){
+                updateKittenPosWithBtnID(this.currentX+1, this.currentY)
+                this.currentX += 1
+            } else {
+                updateKittenPosWithBtnID(this.currentX+1, this.currentY+1)
+                this.currentX += 1
+                this.currentY += 1
+                
+            }
+        },
         upMove() {
             const up = this.boardArray[this.currentX-1][this.currentY]
             const upLeft = this.boardArray[this.currentX-1][this.currentY-1]
-            if (this.currentX%2 == 0 && upLeft == false) {
+            if (this.currentX%2 == 0 && !upLeft) {
                 updateKittenPosWithBtnID(this.currentX-1, this.currentY-1)
                 this.currentX -= 1
                 this.currentY -= 1
@@ -225,11 +259,27 @@ export const App = Vue.extend({
                 this.currentY += 1   
             }
         },
-        
 
+        downMove() {
+            const down = this.boardArray[this.currentX+1][this.currentY]
+            const downLeft = this.boardArray[this.currentX+1][this.currentY-1]
+            if (this.currentX%2 == 0 && !downLeft) {
+                updateKittenPosWithBtnID(this.currentX+1, this.currentY-1)
+                this.currentX += 1
+                this.currentY -= 1
+            }else if (!down) {
+                updateKittenPosWithBtnID(this.currentX+1, this.currentY)
+                this.currentX += 1
+            } else {
+                updateKittenPosWithBtnID(this.currentX+1, this.currentY+1)
+                this.currentX += 1
+                this.currentY += 1   
+            }
+        },
+        
         detectWinOrLose() {
             if (this.currentX == 0 || this.currentY == 0) {
-                console.log("YOU WIN!!!!!!!!")
+                console.log("YOU LOSE!!!!!!!!")
             }
         }
     },
