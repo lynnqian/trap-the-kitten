@@ -43,7 +43,7 @@ export const App = Vue.extend({
             this.windowH = window.innerHeight;
             this.windowW = window.innerWidth;
 
-            const divH = this.windowH * 0.85;
+            const divH = (this.windowH - 55) * 0.85;
             this.vertiN = Math.floor(divH / 86);
             // TODO: Change the divW calculation for better mobile experience.
             const divW = this.windowW * 0.60;
@@ -51,8 +51,9 @@ export const App = Vue.extend({
         },
 
         getMainContainerStyle () {
+            const gameContainerHeight = this.windowH - 100
             return {
-                marginTop: this.windowH * 0.15 / 2 + 'px'
+                marginTop: gameContainerHeight * 0.15 / 4 + 'px'
             };
         },
 
@@ -89,7 +90,7 @@ export const App = Vue.extend({
                 } else if (this.canDownMove(this.currentX, this.currentY)) {
                     this.downMove()
                 } else {
-                    console.log("WINNNNNNN!!!!");
+                    this.$bvModal.show("win-modal")
                 }
             } else {
                 if (this.canLeftMove(this.currentX, this.currentY)) {
@@ -101,7 +102,7 @@ export const App = Vue.extend({
                 } else if (this.canRightMove(this.currentX, this.currentY)) {
                     this.rightMove()
                 } else {
-                    console.log("WINNNNNNN!!!!");
+                    this.$bvModal.show("win-modal")
                 }
             }
             this.detectWinOrLose()
@@ -235,8 +236,12 @@ export const App = Vue.extend({
         
         detectWinOrLose() {
             if (this.currentX == 0 || this.currentY == 0) {
-                console.log("YOU LOSE!!!!!!!!")
+                this.$bvModal.show("lose-modal")
             }
+        },
+
+        handleNewGame() {
+            location.reload()
         }
     },
 
