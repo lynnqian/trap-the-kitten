@@ -6,6 +6,23 @@
     color: #2c3e50;
 }
 
+.btn-ok {
+    background-color: #ffdeec;
+}
+
+.btn-ok:hover {
+    background-color: #ffb3d2;
+}
+
+.btn-cancel {
+    border-color: #9c8990;
+}
+
+.btn-cancel:hover {
+    background-color: #fff2f7;
+    border-color: #9c8990;
+}
+
 .btn-circle {
     width: 40px;
     height: 40px;

@@ -1,22 +1,31 @@
 <template>
   <div id="app">
     <!-- Navbar -->
-    <nav class="navbar navbar-expand-lg navbar-light" id="nav" style="background-color:#f2f2f2">
-      <a class="navbar-brand mb-0 h1" id="dove-brand">Dove Playground</a>
-      <a href="#" class="nav-link text-secondary" id="new-game-btn" v-b-modal.restart-modal>New Game</a>
+    <nav class="navbar navbar-expand-lg navbar-light" id="nav" style="background-color:#ffdeec">
+      <a class="navbar-brand mb-0 h1" id="dove-brand">Trap the Kitten! 🐱</a>
+      <a href="#" class="nav-link text-secondary mr-auto" id="new-game-btn" v-b-modal.restart-modal>New Game 🕹️</a>
     </nav>
 
     <!-- Modal -->
-    <b-modal id="win-modal" title="You Win!" @ok="handleNewGame">
+    <b-modal id="win-modal" @ok="handleNewGame" ok-variant="ok" cancel-variant="cancel" header-class="modal-header-class">
+      <template #modal-header>
+        <h5>You Win!</h5>
+      </template>
       <p class="my-4">Congratulations! Do you want to play again?</p>
     </b-modal>
 
-    <b-modal id="lose-modal" title="You Lose!" @ok="handleNewGame">
+    <b-modal id="lose-modal" @ok="handleNewGame" ok-variant="ok" cancel-variant="cancel" header-class="modal-header-class">
+      <template #modal-header>
+        <h5>You Lose!</h5>
+      </template>
       <p class="my-4">Oops. Do you want to try again?</p>
     </b-modal>
 
-    <b-modal id="restart-modal" title="Restart" @ok="handleNewGame">
-      <p class="my-4">Do you want to restart?</p>
+    <b-modal id="restart-modal" @ok="handleNewGame" ok-variant="ok" cancel-variant="cancel" header-class="modal-header-class">
+      <template #modal-header>
+        <h5>Restart</h5>
+      </template>
+      <p class="my-4">Do you want to start over?</p>
     </b-modal>
 
     <!-- Main Game Board -->
@@ -35,6 +44,12 @@
     </div>
   </div>
 </template>
+
+<style scoped>
+  /deep/ .modal-header-class {
+    background: #ffdeec;
+  }
+</style>
 
 <script lang="ts">
 import { Vue } from 'vue-property-decorator';
