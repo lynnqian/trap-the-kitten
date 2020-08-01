@@ -13,7 +13,7 @@ function updateKittenPosWithBtnID(x: number, y: number) {
 // noinspection JSUnusedGlobalSymbols
 export const App = Vue.extend({
     data () {
-        const vn = Math.floor(window.innerHeight * 0.85 / 86);
+        const vn = Math.floor((window.innerHeight - 55) * 0.85 / 86);
         const hn = Math.floor(window.innerWidth * 0.75 / 43);
         const x = Math.floor((vn - 1))
         const y = Math.floor((hn - 1)/2)
@@ -48,8 +48,7 @@ export const App = Vue.extend({
 
             const divH = (this.windowH - 55) * 0.85;
             this.vertiN = Math.floor(divH / 86);
-            // TODO: Change the divW calculation for better mobile experience.
-            const divW = this.windowW * 0.60;
+            const divW = this.windowW * 0.75;
             this.horiN = Math.floor(divW / 43);
         },
 

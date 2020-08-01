@@ -8,7 +8,7 @@
     </nav>
 
     <!-- Modal -->
-    <b-modal id="tutorial-modal" ok-variant="ok" cancel-variant="cancel" header-class="modal-header-class" size="xl">
+    <b-modal id="tutorial-modal" ok-variant="ok" cancel-variant="cancel" header-class="modal-header-class" size="lg">
       <template #modal-header>
         <h5>Tutorial</h5>
       </template>
