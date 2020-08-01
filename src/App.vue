@@ -3,8 +3,8 @@
     <!-- Navbar -->
     <nav class="navbar navbar-expand-lg navbar-light" id="nav" style="background-color:#ffdeec">
       <a class="navbar-brand mb-0 h1" id="dove-brand">Trap the Kitten! 🐱</a>
-      <a href="#" class="nav-link text-secondary mr-auto" id="tut-btn" v-b-modal.tutorial-modal>Tutorial 📘</a>
-      <a href="#" class="nav-link text-secondary" id="new-game-btn" v-b-modal.restart-modal>New Game 🕹️</a>
+      <a href="#" class="nav-link text-secondary mr-left" id="tut-btn" v-b-modal.tutorial-modal>Tutorial 📘</a>
+      <a href="#" class="nav-link text-secondary mr-left" id="new-game-btn" v-b-modal.restart-modal>New Game 🕹️</a>
     </nav>
 
     <!-- Modal -->
