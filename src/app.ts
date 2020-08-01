@@ -23,7 +23,6 @@ export const App = Vue.extend({
         for (let i = 0; i < vn * 2; i++) {
             bArr[i] = Array(hn).fill(false);
         }
-        
 
         return {
             windowH: window.innerHeight,
@@ -34,7 +33,11 @@ export const App = Vue.extend({
             shownButton: true,
             boardArray: bArr,
             currentX: x,
-            currentY: y
+            currentY: y,
+
+            // For tutorial carousel
+            slide: 0,
+            sliding: false
         };
     },
 
@@ -242,6 +245,14 @@ export const App = Vue.extend({
 
         handleNewGame() {
             location.reload()
+        },
+
+        // For tutorial carousel
+        onSlideStart() {
+            this.sliding = true
+        },
+        onSlideEnd() {
+            this.sliding = false
         }
     },
 
