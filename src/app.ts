@@ -14,7 +14,7 @@ function updateKittenPosWithBtnID(x: number, y: number) {
 export const App = Vue.extend({
     data () {
         const vn = Math.floor(window.innerHeight * 0.85 / 86);
-        const hn = Math.floor(window.innerWidth * 0.60 / 43);
+        const hn = Math.floor(window.innerWidth * 0.75 / 43);
         const x = Math.floor((vn - 1))
         const y = Math.floor((hn - 1)/2)
 
