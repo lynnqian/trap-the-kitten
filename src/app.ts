@@ -203,11 +203,14 @@ export const App = Vue.extend({
         upMove() {
             const up = this.boardArray[this.currentX-1][this.currentY]
             const upLeft = this.boardArray[this.currentX-1][this.currentY-1]
-            if (this.currentX%2 == 0 && !upLeft) {
+            if (this.currentX%2 == 0 && !upLeft && this.canUpMove(this.currentX-1, this.currentY-1)) {
                 updateKittenPosWithBtnID(this.currentX-1, this.currentY-1)
                 this.currentX -= 1
                 this.currentY -= 1
-            }else if (up == false) {
+            } else if (this.currentX == 1 && !up) {
+                updateKittenPosWithBtnID(this.currentX-1, this.currentY)
+                this.currentX -= 1
+            } else if (!up && this.canUpMove(this.currentX-1, this.currentY)) {
                 updateKittenPosWithBtnID(this.currentX-1, this.currentY)
                 this.currentX -= 1
             } else {
@@ -220,11 +223,14 @@ export const App = Vue.extend({
         downMove() {
             const down = this.boardArray[this.currentX+1][this.currentY]
             const downLeft = this.boardArray[this.currentX+1][this.currentY-1]
-            if (this.currentX%2 == 0 && !downLeft) {
+            if (this.currentX%2 == 0 && !downLeft && this.canDownMove(this.currentX+1, this.currentY-1)) {
                 updateKittenPosWithBtnID(this.currentX+1, this.currentY-1)
                 this.currentX += 1
                 this.currentY -= 1
-            }else if (!down) {
+            } else if (this.currentX == this.vertiN*2-2 && !down) {
+                updateKittenPosWithBtnID(this.currentX+1, this.currentY)
+                this.currentX += 1
+            }else if (!down && this.canDownMove(this.currentX+1, this.currentY)) {
                 updateKittenPosWithBtnID(this.currentX+1, this.currentY)
                 this.currentX += 1
             } else {
