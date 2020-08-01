@@ -13,19 +13,22 @@
         <h5>Tutorial</h5>
       </template>
       <b-carousel id="tut-carousel" v-model="slide" :interval="4000" controls indicators background="#ababab" img-width="1024" img-height="480"
-                  style="text-shadow: 1px 1px 2px #333;" @sliding-start="onSlideStart" @sliding-end="onSlideEnd">
+                  @sliding-start="onSlideStart" @sliding-end="onSlideEnd">
         <b-carousel-slide
-            text="Try to trap the kitten by clicking on the circles."
-            img-src="./img/tut1"
-        ></b-carousel-slide>
+            img-src="https://raw.githubusercontent.com/lynnqian/trap-the-kitten/master/src/img/tut-1.png"
+        >
+          <h5 style="color: black">Try to trap the kitten by clicking on the circles.</h5>
+        </b-carousel-slide>
         <b-carousel-slide
-            text="If the kitten runs to the edges, you lose."
-            img-src="./img/tut2"
-        ></b-carousel-slide>
+            img-src="https://raw.githubusercontent.com/lynnqian/trap-the-kitten/master/src/img/tut-2.png"
+        >
+          <h5 style="color: black">If the kitten runs to the edges, you lose.</h5>
+        </b-carousel-slide>
         <b-carousel-slide
-            text="If you trapped the kitten, you win!"
-            img-src="./img/tut3"
-        ></b-carousel-slide>
+            img-src="https://raw.githubusercontent.com/lynnqian/trap-the-kitten/master/src/img/tut-3.png"
+        >
+          <h5 style="color: black">If you trapped the kitten, you win!</h5>
+        </b-carousel-slide>
       </b-carousel>
     </b-modal>
 
@@ -52,7 +55,7 @@
 
     <!-- Main Game Board -->
     <div :style="getMainContainerStyle()">
-      <img src="https://raw.githubusercontent.com/lynnqian/trap-the-kitten/master/img/kitten.png" alt="kitten" id="kitten-image">
+      <img src="https://raw.githubusercontent.com/lynnqian/trap-the-kitten/master/src/img/kitten.png" alt="kitten" id="kitten-image">
       <div v-for="i in vertiN" :key="i">
         <div class="btn-left">
           <button v-for="j in horiN" :key="j" :style="getButtonStyle((i-1)*2, j-1)" :id="'btn' + (i-1)*2 + '-' + (j-1)"
@@ -70,6 +73,20 @@
 <style scoped>
   /deep/ .modal-header-class {
     background: #ffdeec;
+  }
+</style>
+
+<style>
+  .carousel .carousel-indicators li {
+    background-color: black;
+  }
+
+  .carousel-control-prev-icon {
+    background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%23000' viewBox='0 0 8 8'%3E%3Cpath d='M5.25 0l-4 4 4 4 1.5-1.5-2.5-2.5 2.5-2.5-1.5-1.5z'/%3E%3C/svg%3E") !important;
+  }
+
+  .carousel-control-next-icon {
+    background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%23000' viewBox='0 0 8 8'%3E%3Cpath d='M2.75 0l-1.5 1.5 2.5 2.5-2.5 2.5 1.5 1.5 4-4-4-4z'/%3E%3C/svg%3E") !important;
   }
 </style>
 

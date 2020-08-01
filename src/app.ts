@@ -249,7 +249,7 @@ export const App = Vue.extend({
 
         // For tutorial carousel
         onSlideStart() {
-            this.sliding = true
+            this.sliding = false
         },
         onSlideEnd() {
             this.sliding = false
